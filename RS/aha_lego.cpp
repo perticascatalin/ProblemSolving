@@ -63,6 +63,16 @@ int main()
 			for (int j = 0; j < m; ++j)
 				cin >> prize[i][j];
 
+		// print prizes / in division 
+		for (int i = 0; i < n; ++i)
+		{
+			for (int j = 0; j < m; ++j)
+				if (in[i][j]) cout << prize[i][j] << " ";
+				else cout << "N ";
+			cout << endl;
+		}
+
+
 		// compute estim
 		for (int j = 0; j < m; ++j)
 		{
@@ -75,6 +85,8 @@ int main()
 		}
 
 		// print estim
+		// cout << "====================" << endl;
+		cout << endl;
 		for (int i = 0; i < n; ++i)
 		{
 			for (int j = 0; j < m; ++j) cout << estim[i][j] << " ";
@@ -86,7 +98,8 @@ int main()
 		vector <int> perm;
 		for (int i = 0; i < m; ++i) perm.push_back(i);
 		do {
-			cout << "====================" << endl;
+			// cout << "====================" << endl;
+			cout << endl;
 			cout << "PERMUTATION: ";
 			for (int i = 0; i < m; ++i) cout << perm[i] << " ";
 			cout << endl;
