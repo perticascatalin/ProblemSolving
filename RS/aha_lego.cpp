@@ -174,14 +174,18 @@ int main()
 
 			// compute leave outs and permutation score
 			int score = 0;
+			cout << "DIV_LEFT_OUT: ";
 			for (int d = 0; d < m; ++d)
 			{
-				cout << "Div " << d << " leave out : ";
-				for (list<int>::iterator it = leave_out[d].begin(); it != leave_out[d].end(); ++it) cout << *it << " ";
-				cout << endl;
+				// cout << "Div " << d << " leave out : ";
+				// for (list<int>::iterator it = leave_out[d].begin(); it != leave_out[d].end(); ++it) cout << *it << " ";
+				// cout << endl;
+				if (leave_out[d].empty()) cout << "N ";
+				else cout << leave_out[d].front() << " ";
 
-				if ((!leave_out[d].empty() && div_min[d] > leave_out[d].front()) || leave_out[d].empty()) ++score;
+				if ((!leave_out[d].empty() && div_min[d] >= leave_out[d].front()) || leave_out[d].empty()) ++score;
 			}
+			cout << endl;
 
 			cout << "PERM SCORE: " << score << endl; 
 
