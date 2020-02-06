@@ -179,7 +179,7 @@ int main()
 			memset(div_min, -1, sizeof(div_min));
 			for (int i = 0; i < n; ++i)
 				for (int j = 0; j < m; ++j)
-					if (div_min[j] == -1 || div_min[j] > pprize[i]) div_min[j] = pprize[i];
+					if (in[i][j] && (div_min[j] == -1 || div_min[j] > pprize[i])) div_min[j] = pprize[i];
 
 			cout << "DIV_MINS: ";
 			for (int d = 0; d < m; ++d) cout << div_min[d] << " ";
@@ -196,7 +196,7 @@ int main()
 				if (leave_out[d].empty()) cout << "N ";
 				else cout << leave_out[d].front() << " ";
 
-				if ((!leave_out[d].empty() && div_min[d] >= leave_out[d].front()) || leave_out[d].empty()) ++score;
+				if ((!leave_out[d].empty() && div_min[d] >= leave_out[d].front()) || leave_out[d].empty() || div_min[d] == -1) ++score;
 			}
 			cout << endl;
 
