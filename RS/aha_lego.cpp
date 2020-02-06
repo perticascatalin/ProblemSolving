@@ -85,7 +85,6 @@ int main()
 		}
 
 		// print estim
-		// cout << "====================" << endl;
 		cout << endl;
 		for (int i = 0; i < n; ++i)
 		{
@@ -98,7 +97,6 @@ int main()
 		vector <int> perm;
 		for (int i = 0; i < m; ++i) perm.push_back(i);
 		do {
-			// cout << "====================" << endl;
 			cout << endl;
 			cout << "PERMUTATION: ";
 			for (int i = 0; i < m; ++i) cout << perm[i] << " ";
@@ -126,8 +124,6 @@ int main()
 				int num_players = re_players(division);
 				int avg = 0;
 				if (num_players > 0) avg = prize_sum / num_players;
-
-				// cout << "!!!! " << avg << endl;
 
 				// put in pprize 
 				for (int i = 0; i < n; ++i) if (in[i][division] && !scored[i]) pprize[i] = avg;
@@ -190,16 +186,12 @@ int main()
 			cout << "DIV_LEFT_OUT: ";
 			for (int d = 0; d < m; ++d)
 			{
-				// cout << "Div " << d << " leave out : ";
-				// for (list<int>::iterator it = leave_out[d].begin(); it != leave_out[d].end(); ++it) cout << *it << " ";
-				// cout << endl;
 				if (leave_out[d].empty()) cout << "N ";
 				else cout << leave_out[d].front() << " ";
 
 				if ((!leave_out[d].empty() && div_min[d] >= leave_out[d].front()) || leave_out[d].empty() || div_min[d] == -1) ++score;
 			}
 			cout << endl;
-
 			cout << "PERM SCORE: " << score << endl; 
 
 		} while (next_permutation(perm.begin(), perm.end()));
