@@ -139,7 +139,7 @@ int main()
 					{
 						// for player in the current division, if prize in avail division & not scored
 						// note: should not have prize if already scored
-						for (int i = n - 1; i > 0; --i) // bottom-up
+						for (int i = n - 1; i >= 0; --i) // bottom-up
 							if (in[i][division] && reprize[i][d] && !scored[i])
 							{
 								// for players in available division push down prize until current player
