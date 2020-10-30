@@ -6,9 +6,7 @@
 #include <algorithm>
 
 using namespace std;
-
 #define NM 40
-#define inf 1000000000
 
 int N;
 int mark[NM][NM];
@@ -19,43 +17,61 @@ int found;
 vector <int> sol;
 vector <int> G[NM*NM];
 
-void adjust_neighbors(int loc, int val)
-{
-	for (int i = 0; i < G[loc].size(); ++i)
-	{
+void build_graph() {
+	for (int loc = 0; loc < N * N; ++loc) {
+		int l = loc / N;
+		int c = loc % N;
+		for (int k = 0; k < 8; ++k) {
+			int nl = l + pl[k];
+			int nc = c + pc[k];
+			if (nl < 0 || nl >= N) continue;
+			if (nc < 0 || nc >= N) continue;
+			int nloc = N * nl + nc;
+			G[loc].push_back(nloc);
+			avail_moves[loc]++;
+		}
+	}
+}
+
+void display_solution() {
+	int display[NM][NM];
+	memset(display, 0, sizeof(display));
+	for (int i = 0; i < N * N; ++i) {
+		int loc = sol[i];
+		int l = loc / N;
+		int c = loc % N;
+		display[l][c] = i + 1;
+	}
+	for (int i = 0; i < N; ++i) {
+		for (int j = 0; j < N; ++j) cout << display[i][j] << " ";
+		cout << "\n";
+	}
+}
+
+void adjust_neighbors(int loc, int val) {
+	for (int i = 0; i < G[loc].size(); ++i) {
 		int nloc = G[loc][i];
 		avail_moves[nloc] += val;
 	}
 }
 
-bool compare(int a, int b)
-{
+bool compare(int a, int b) {
 	if (mark_loc[a] < mark_loc[b]) return true;
 	if (avail_moves[a] < avail_moves[b]) return true;
 	return false;
 }
 
-void explore(int step)
-{
-	if (step == N * N)
-	{
-		// We have a solution
-		// Need to print it & return
+void explore(int step) {
+	if (step == N * N) { // We have a solution, print it & return
 		found = 1;
-		for (int i = 0; i < sol.size(); ++i)
-		{
-			int l = sol[i] / N;
-			int c = sol[i] % N;
-			cout << l << " " << c << "\n";
-		}
+		display_solution();
 	}
 	int loc = sol[step - 1];
 	int l = loc / N;
 	int c = loc % N;
 
 	sort(G[loc].begin(), G[loc].end(), compare);
-	for (int k = 0; k < G[loc].size(); ++k)
-	{
+	for (int k = 0; k < G[loc].size(); ++k) {
 		int nloc = G[loc][k];
 		int nl = nloc / N;
 		int nc = nloc % N;
@@ -74,27 +90,7 @@ void explore(int step)
 	}
 }
 
-void build_graph()
-{
-	for (int loc = 0; loc < N * N; ++loc)
-	{
-		int l = loc / N;
-		int c = loc % N;
-		for (int k = 0; k < 8; ++k)
-		{
-			int nl = l + pl[k];
-			int nc = c + pc[k];
-			if (nl < 0 || nl >= N) continue;
-			if (nc < 0 || nc >= N) continue;
-			int nloc = N * nl + nc;
-			G[loc].push_back(nloc);
-			avail_moves[loc]++;
-		}
-	}
-}
-
-int main()
-{
+int main() {
 	int l, c;
 	ifstream cin("k.in");
 	ofstream cout("k.out");

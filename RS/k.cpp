@@ -5,7 +5,6 @@
 #include <vector>
 
 using namespace std;
-
 #define NM 10
 
 int N;
@@ -15,25 +14,30 @@ int pc[8] = {-2,-1,1,2,2,1,-1,-2};
 int found;
 vector <int> sol;
 
-void explore(int step)
-{
-	if (step == N * N)
-	{
-		// We have a solution
-		// Need to print it & return
+void display_solution() {
+	int display[NM][NM];
+	memset(display, 0, sizeof(display));
+	for (int i = 0; i < N * N; ++i) {
+		int loc = sol[i];
+		int l = loc / N;
+		int c = loc % N;
+		display[l][c] = i + 1;
+	}
+	for (int i = 0; i < N; ++i) {
+		for (int j = 0; j < N; ++j) cout << display[i][j] << " ";
+		cout << "\n";
+	}
+}
+
+void explore(int step) {
+	if (step == N * N) { // We have a solution, print it & return
 		found = 1;
-		for (int i = 0; i < sol.size(); ++i)
-		{
-			int l = sol[i] / N;
-			int c = sol[i] % N;
-			cout << l << " " << c << "\n";
-		}
+		display_solution();
 	}
 	int loc = sol[step - 1];
 	int l = loc / N;
 	int c = loc % N;
-	for (int k = 0; k < 8; ++k)
-	{
+	for (int k = 0; k < 8; ++k) {
 		int nl = l + pl[k];
 		int nc = c + pc[k];
 		if (nl < 0 || nl >= N) continue;
@@ -49,8 +53,7 @@ void explore(int step)
 	}
 }
 
-int main()
-{
+int main() {
 	int l, c;
 	ifstream cin("k.in");
 	ofstream cout("k.out");
