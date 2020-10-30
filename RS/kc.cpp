@@ -52,6 +52,7 @@ void explore(int step) {
 	if (step == N * N) { // We have a solution, print it & return
 		found = 1;
 		display_solution();
+		return;
 	}
 	int loc = sol[step - 1];
 	int l = loc / N;
