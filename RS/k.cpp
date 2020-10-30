@@ -14,6 +14,7 @@ int pc[8] = {-2,-1,1,2,2,1,-1,-2};
 int found;
 vector <int> sol;
 
+// Displays the board: each cell value shows the step at which it was reached
 void display_solution() {
 	int display[NM][NM];
 	memset(display, 0, sizeof(display));
@@ -29,6 +30,7 @@ void display_solution() {
 	}
 }
 
+// Explore subtree at level step
 void explore(int step) {
 	if (step == N * N) { // We have a solution, print it & return
 		found = 1;
@@ -40,6 +42,7 @@ void explore(int step) {
 	for (int k = 0; k < 8; ++k) {
 		int nl = l + pl[k];
 		int nc = c + pc[k];
+		// A move is not allowed if outside the board or marked cell
 		if (nl < 0 || nl >= N) continue;
 		if (nc < 0 || nc >= N) continue;
 		if (mark[nl][nc]) continue;
@@ -56,7 +59,6 @@ void explore(int step) {
 int main() {
 	int l, c;
 	ifstream cin("k.in");
-	ofstream cout("k.out");
 	cin >> N >> l >> c;
 	clock_t begin = clock();
 	memset(mark, 0, sizeof(mark));
@@ -66,7 +68,7 @@ int main() {
 	explore(1);
 	clock_t end = clock();
 	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-	cout << elapsed_secs << "\n";
-	cout << found << "\n";
+	cout << "Time (sec): " << elapsed_secs << "\n";
+	cout << "Solutions found: " << found << "\n";
 	return 0;
 }
