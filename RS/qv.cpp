@@ -5,7 +5,7 @@
 #include <vector>
 
 using namespace std;
-#define NM 10
+#define NM 28
 
 int N;
 int found;
@@ -40,7 +40,8 @@ void explore(int step) {
 	for (int i = 0; i < N; ++i)
 	{
 		sol.push_back(i);
-		explore(step + 1);
+		// Only continue exploration if path consistent so far
+		if (valid_solution()) explore(step + 1);
 		sol.pop_back();
 		if (found) return;
 	}
