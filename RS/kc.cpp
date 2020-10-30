@@ -14,6 +14,7 @@ int pl[8] = {-1,-2,-2,-1,1,2,2,1};
 int pc[8] = {-2,-1,1,2,2,1,-1,-2};
 int found;
 vector <int> sol;
+vector <int> G[NM*NM];
 
 void explore(int step)
 {
@@ -32,20 +33,37 @@ void explore(int step)
 	int loc = sol[step - 1];
 	int l = loc / N;
 	int c = loc % N;
-	for (int k = 0; k < 8; ++k)
+	for (int k = 0; k < G[loc].size(); ++k)
 	{
-		int nl = l + pl[k];
-		int nc = c + pc[k];
-		if (nl < 0 || nl >= N) continue;
-		if (nc < 0 || nc >= N) continue;
+		int nloc = G[loc][k];
+		int nl = nloc / N;
+		int nc = nloc % N;
 		if (mark[nl][nc]) continue;
 
 		mark[nl][nc] = 1;
-		sol.push_back(N * nl + nc);
+		sol.push_back(nloc);
 		explore(step + 1);
 		sol.pop_back();
 		mark[nl][nc] = 0;
 		if (found) return;
+	}
+}
+
+void build_graph()
+{
+	for (int loc = 0; loc < N * N; ++loc)
+	{
+		int l = loc / N;
+		int c = loc % N;
+		for (int k = 0; k < 8; ++k)
+		{
+			int nl = l + pl[k];
+			int nc = c + pc[k];
+			if (nl < 0 || nl >= N) continue;
+			if (nc < 0 || nc >= N) continue;
+			int nloc = N * nl + nc;
+			G[loc].push_back(nloc);
+		}
 	}
 }
 
@@ -56,6 +74,7 @@ int main()
 	ofstream cout("k.out");
 	cin >> N >> l >> c;
 	clock_t begin = clock();
+	build_graph();
 	memset(mark, 0, sizeof(mark));
 	mark[l][c] = 1;
 	sol.push_back(N * l + c);
