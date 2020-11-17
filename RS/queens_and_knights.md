@@ -21,3 +21,31 @@ Generate tours for a knight starting at a given position on an N x N board. Each
 |K (simple)|8  |23 sec|
 |K (arc consistency)|8 | 20 sec|
 |K (look ahead)|100| 0.03 sec|
+
+## Code Documentation
+
+### Simple Backtracking
+
+Queens Problem: q.cpp
+
+Knights Problem: k.cpp
+
+### Problem Reduction
+
+Queens Problem: qv.cpp
+
+**Path Consistency**: When searching for a solution always validate that the labels generated so far are consistent with one another (check that queens do not attack each other).
+
+Knights Problem: kc.cpp
+
+**Arc Consistency**: When generating a new label (a knight move), use the constraint graph edges from the current node in order to avoid generating non-consistent arcs (such as moves outside of the board).
+
+### Basic Search Strategies
+
+Queens Problem: qla.cpp
+
+**Lookahead**: Prevent exploring current subtree if not enough available/free labels for the remaining queens.
+
+Knights Problem: kla.cpp
+
+**Lookahead**: Prioritize exploring moves landing in a position where the number of possible moves is the lowest.
