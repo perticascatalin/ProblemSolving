@@ -11,7 +11,7 @@ int N;
 int mark_loc[NM*NM];
 int pl[8] = {-1,-2,-2,-1,1,2,2,1};
 int pc[8] = {-2,-1,1,2,2,1,-1,-2};
-int found;
+int found, num_sol;
 vector <int> sol;
 vector <int> G[NM*NM];
 
@@ -45,12 +45,13 @@ void display_solution() {
 		for (int j = 0; j < N; ++j) cout << display[i][j] << " ";
 		cout << "\n";
 	}
+	cout << "\n";
 }
 
 // Explore subtree at level step
 void explore(int step) {
 	if (step == N * N) { // We have a solution, print it & return
-		found = 1;
+		++found;
 		display_solution();
 		return;
 	}
@@ -66,14 +67,14 @@ void explore(int step) {
 		explore(step + 1);
 		sol.pop_back();
 		mark_loc[nloc] = 0;
-		if (found) return;
+		if (found == num_sol) return;
 	}
 }
 
 int main() {
 	int l, c;
 	ifstream cin("k.in");
-	cin >> N >> l >> c;
+	cin >> N >> l >> c >> num_sol;
 	clock_t begin = clock();
 	memset(mark_loc, 0, sizeof(mark_loc));
 	build_graph();
