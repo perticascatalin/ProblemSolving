@@ -1,3 +1,4 @@
+// 27, 5, 18.2
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -8,7 +9,7 @@ using namespace std;
 #define NM 28
 
 int N;
-int found;
+int found, num_sol;
 vector <int> sol;
 
 void display_solution() {
@@ -18,6 +19,7 @@ void display_solution() {
 		for (int j = 0; j < N; ++j) cout << display[i][j] << " ";
 		cout << "\n";
 	}
+	cout << "\n";
 }
 
 int valid_solution() {
@@ -32,7 +34,7 @@ int valid_solution() {
 void explore(int step) {
 	if (step == N) {
 		if (valid_solution()) {
-			found = 1;
+			++found;
 			display_solution();
 		}
 		return;
@@ -43,14 +45,15 @@ void explore(int step) {
 		// Only continue exploration if path consistent so far
 		if (valid_solution()) explore(step + 1);
 		sol.pop_back();
-		if (found) return;
+		if (found == num_sol) return;
 	}
 }
 
 int main() {
 	ifstream cin("q.in");
-	cin >> N;
+	cin >> N >> num_sol;
 	clock_t begin = clock();
+	found = 0;
 	explore(0);
 	clock_t end = clock();
 	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
