@@ -13,6 +13,17 @@ N rows, each with a single queen => N variables, N labels. Variable i assigned l
 - diff column: `i != j => Q[i] != Q[j]`
 - no diagonal: `abs(i-j) != abs(Q[i] - Q[j])`
 
+### Sample Solution
+
+- 1 0 0 0 0 0 0 0 
+- 0 0 0 0 2 0 0 0 
+- 0 0 0 0 0 0 0 3 
+- 0 0 0 0 0 4 0 0 
+- 0 0 5 0 0 0 0 0 
+- 0 0 0 0 0 0 6 0 
+- 0 7 0 0 0 0 0 0 
+- 0 0 0 8 0 0 0 0 
+
 ### Problem analysis
 
 |Solver    |N  |First Solution| 5 solutions|
@@ -42,6 +53,17 @@ Generating labels for each variable in the compound would be too inefficient, so
 - Create constraint graph using the mapping: `i = l * N + c`
 
 *Note*: 0-indexed
+
+### Sample solution
+
+- 1 16 27 22 3 18 49 46 
+- 26 23 2 17 50 47 4 19 
+- 15 28 25 54 21 52 45 48 
+- 24 35 30 51 58 55 20 5 
+- 29 14 63 34 53 44 59 56 
+- 36 31 38 41 64 57 6 9 
+- 13 40 33 62 11 8 43 60 
+- 32 37 12 39 42 61 10 7 
 
 ### Problem analysis
 
@@ -128,3 +150,7 @@ Queens Problem: `qla.cpp`
 Knights Problem: `kla.cpp`
 
 **Lookahead**: Prioritize exploring moves landing in a position where the number of possible moves is the lowest.
+
+### Conclusions
+
+Consistency validation (problem reduction) more effective than look ahead (search strategy) in the case of Queens problem and viceversa in the case of Knights problem. However, this outcome is influenced by the details of the implementation.
