@@ -1,4 +1,3 @@
-// 27, 5, 19.4
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -19,6 +18,7 @@ void display_solution() {
 		for (int j = 0; j < N; ++j) cout << display[i][j] << " ";
 		cout << "\n";
 	}
+	cout << "\n";
 }
 
 int valid_solution() {

@@ -15,13 +15,14 @@ N rows, each with a single queen => N variables, N labels. Variable i assigned l
 
 ### Problem analysis
 
-|Solver    |N  |First Solution|
-|:--------:|:-:|:-------------------------|
-|Q (simple)|8  |0.1 sec|
-|Q (simple)|10 |15 sec|
-|Q (path consistency)|10 | 0 sec|
-|Q (path consistency)|27 | 15 sec|
-|Q (look ahead)|27 | 15 sec|
+|Solver    |N  |First Solution| 5 solutions|
+|:--------:|:-:|:------------:|:----------:|
+|Q (simple)|8  |0.1 sec||
+|Q (simple)|10 |15 sec||
+|Q (path consistency)|10 | 0 sec|0.002 sec|
+|Q (look ahead)|10 | 0 sec|0.0025 sec|
+|Q (path consistency)|27 | 15 sec|18.2 sec|
+|Q (look ahead)|27 | 15 sec|19.4 sec|
 
 ## Knights Problem
 

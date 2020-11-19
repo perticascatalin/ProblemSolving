@@ -1,4 +1,3 @@
-// 27, 5, 18.2
 #include <iostream>
 #include <fstream>
 #include <string>
