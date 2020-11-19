@@ -67,11 +67,11 @@ Generating labels for each variable in the compound would be too inefficient, so
 
 ### Problem analysis
 
-|Solver    |N  |First Solution|
-|:--------:|:-:|:-------------------------|
-|K (simple)|8  |23 sec|
-|K (arc consistency)|8 | 20 sec|
-|K (look ahead)|100| 0.03 sec|
+|Solver    |N  |First Solution| 5 solutions|
+|:--------:|:-:|:------------:|:----------:|
+|K (simple)|8  |23 sec|23.8 sec|
+|K (arc consistency)|8 | 20 sec| 20.4 sec|
+|K (look ahead)|100| 0.03 sec| 0.065 sec|
 
 ## Code Documentation
 
